@@ -15,7 +15,7 @@ public class SlackApp extends SlackAppServlet {
   private static App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
-      return ctx.ack("pig latin app reached!");
+      return ctx.ack(req.toString());
     });
     return app;
   }
