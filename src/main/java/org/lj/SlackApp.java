@@ -31,25 +31,25 @@ public class SlackApp extends SlackAppServlet {
   private static String translateToPigLatin(String textToTranslate) {
     String translatedText = "";
     int i = 0;
-    while (i<s.length()) {
+    while (i < textToTranslate.length()) {
       // Take care of punctuation and spaces
-      while (i<s.length() && !isLetter(s.charAt(i))) {
-        latin = latin + s.charAt(i);
+      while (i < textToTranslate.length() && !isLetter(textToTranslate.charAt(i))) {
+        translatedText = translatedText + textToTranslate.charAt(i);
         i++;
       }
 
       // If there aren't any words left, stop.
-      if (i>=s.length()) break;
+      if (i >= textToTranslate.length()) break;
 
       // Otherwise we're at the beginning of a word.
       int begin = i;
-      while (i<s.length() && isLetter(s.charAt(i))) {
+      while (i<textToTranslate.length() && isLetter(textToTranslate.charAt(i))) {
         i++;
       }
 
       // Now we're at the end of a word, so translate it.
       int end = i;
-      translatedText = translatedText + pigWord(s.substring(begin, end));
+      translatedText = translatedText + pigWord(textToTranslate.substring(begin, end));
   }
   return translatedText;
 }
