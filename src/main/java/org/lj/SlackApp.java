@@ -15,9 +15,6 @@ public class SlackApp extends SlackAppServlet {
   private static App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
-      //Tell Slack we got the message before we process.
-      return ctx.ack();
-
       //Translate the input text
       String textToTranslate = req.getPayload().getText();
       String translatedText = translateToPigLatin(textToTranslate);
@@ -26,6 +23,8 @@ public class SlackApp extends SlackAppServlet {
       
       //Send response back to Slack from app
       ctx.respond(textToTranslate + " in Pig Latin is " + translatedText + "! :tada:");
+      //Tell Slack we got the message.
+      return ctx.ack();
     });
     return app;
   }
