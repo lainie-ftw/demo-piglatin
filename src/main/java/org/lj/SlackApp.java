@@ -15,8 +15,19 @@ public class SlackApp extends SlackAppServlet {
   private static App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
-      return ctx.ack("The text of this command that was sent is: " + req.getPayload().getText());
+      //Translate the input text
+      String textToTranslate = req.getPayload().getText();
+      String translatedText = translateToPigLatin(textToTranslate);
+      
+      //Post result to Kafka
+      
+      //Send response back to Slack from app
+      return ctx.ack("The (fake) translated text of this command that was sent is: " + translatedText);
     });
     return app;
+  }
+  
+  private static String translateToPigLatin(String textToTranslate) {
+    return "ake-fay ig-pay atin-lay";
   }
 }
