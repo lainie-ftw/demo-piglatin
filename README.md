@@ -1,1 +1,1 @@
-# demo-piglatin-2
+# demo-piglatin
