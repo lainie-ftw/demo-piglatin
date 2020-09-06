@@ -14,12 +14,12 @@ import java.io.IOException;
 public class SlackApp extends SlackAppServlet {
   private static final long serialVersionUID = 1L;
 
-  @Inject @Channel("messaging-demo") Emitter<String> translationEmitter;
+  @Inject @Channel("messaging-demo") static Emitter<String> translationEmitter;
   
   public SlackApp() throws IOException { super(initSlackApp()); }
   public SlackApp(App app) { super(app); }
 
-  private App initSlackApp() throws IOException {
+  private static App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       //Translate the input text
@@ -38,7 +38,7 @@ public class SlackApp extends SlackAppServlet {
   }
   
   //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
-  private String translateToPigLatin(String textToTranslate) {
+  private static String translateToPigLatin(String textToTranslate) {
     String translatedText = "";
     int i = 0;
     while (i < textToTranslate.length()) {
@@ -69,7 +69,7 @@ public class SlackApp extends SlackAppServlet {
    * @param c The character to test
    * @return True if it's a letter
    */
-  private boolean isLetter(char c) {
+  private static boolean isLetter(char c) {
     return ( (c >='A' && c <='Z') || (c >='a' && c <='z') );
   }
 
@@ -78,7 +78,7 @@ public class SlackApp extends SlackAppServlet {
    * @param word The word in english
    * @return The pig latin version
    */
-  private String pigWord(String word) {
+  private static String pigWord(String word) {
     int split = firstVowel(word);
     return word.substring(split)+"-"+word.substring(0, split)+"ay";
   }
@@ -88,7 +88,7 @@ public class SlackApp extends SlackAppServlet {
    * @param word The word to search
    * @return The index of the first vowel
    */
-  private int firstVowel(String word) {
+  private static int firstVowel(String word) {
     word = word.toLowerCase();
     for (int i=0; i<word.length(); i++)
       if (word.charAt(i)=='a' || word.charAt(i)=='e' ||
