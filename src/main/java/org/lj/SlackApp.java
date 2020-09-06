@@ -3,12 +3,19 @@ package org.lj;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.servlet.SlackAppServlet;
 
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import javax.inject.Inject;
+
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
 @WebServlet("/slack/events")
 public class SlackApp extends SlackAppServlet {
   private static final long serialVersionUID = 1L;
+
+  @Inject @Channel("messaging-demo") Emitter<String> translationEmitter;
+  
   public SlackApp() throws IOException { super(initSlackApp()); }
   public SlackApp(App app) { super(app); }
 
@@ -20,7 +27,7 @@ public class SlackApp extends SlackAppServlet {
       String translatedText = translateToPigLatin(textToTranslate);
       
        //Send result to Kafka
-      TranslationForwarder.forward(translatedText);
+      translationEmmitter.send(translatedText);
             
       //Send response back to Slack from app
     //  ctx.respond(textToTranslate + " in Pig Latin is " + translatedText + "! :tada:");
