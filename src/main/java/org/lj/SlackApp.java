@@ -1,5 +1,7 @@
 package org.lj;
 
+import org.jboss.logging.Logger;
+
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.servlet.SlackAppServlet;
 
@@ -9,6 +11,8 @@ import java.io.IOException;
 @WebServlet("/slack/events")
 public class SlackApp extends SlackAppServlet {
   private static final long serialVersionUID = 1L;
+  
+  private static final Logger LOG = Logger.getLogger(SlackApp.class);
   
   public SlackApp() throws IOException { super(initSlackApp()); }
   public SlackApp(App app) { super(app); }
@@ -21,6 +25,7 @@ public class SlackApp extends SlackAppServlet {
       PigLatin pigLatin = new PigLatin();
       String textToTranslate = req.getPayload().getText();
       String translatedText = pigLatin.translateToPigLatin(textToTranslate);
+      LOG.info(textToTranslate + " translated to " + translatedText);
       
        //Send result to Kafka
       TranslatorResource translator = new TranslatorResource();
