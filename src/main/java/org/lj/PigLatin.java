@@ -1,6 +1,6 @@
 package org.lj;
 
-public class PigLatin ( 
+public class PigLatin {
  //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
  
   public String translateToPigLatin(String textToTranslate) {
