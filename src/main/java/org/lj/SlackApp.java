@@ -27,7 +27,7 @@ public class SlackApp extends SlackAppServlet {
       String translatedText = translateToPigLatin(textToTranslate);
       
        //Send result to Kafka
-      translationEmitter.send(translatedText);
+      sendToKafka(translatedText);
             
       //Send response back to Slack from app
     //  ctx.respond(textToTranslate + " in Pig Latin is " + translatedText + "! :tada:");
@@ -35,6 +35,10 @@ public class SlackApp extends SlackAppServlet {
       return ctx.ack("got it");
     });
     return app;
+  }
+  
+  private void sendToKafka(String translatedText) {
+    translationEmitter.send(translatedText);
   }
   
   //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
