@@ -15,7 +15,9 @@ public class TranslationForwarder {
     @Outgoing("messaging-demo")                         
     @Broadcast                                          
     public String forward(String message) {
-        return '{"text":"' + message + '"}';
+        String tempStart = '{"text":"';
+        String tempEnd = '"}';
+        return tempStart + message + tempEnd;
     }
 
 }
