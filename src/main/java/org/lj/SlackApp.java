@@ -19,7 +19,7 @@ public class SlackApp extends SlackAppServlet {
   public SlackApp() throws IOException { super(initSlackApp()); }
   public SlackApp(App app) { super(app); }
 
-  private static App initSlackApp() throws IOException {
+  private App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       //Translate the input text
@@ -27,7 +27,7 @@ public class SlackApp extends SlackAppServlet {
       String translatedText = translateToPigLatin(textToTranslate);
       
        //Send result to Kafka
-      sendToKafka(translatedText);
+       translationEmitter.send(translatedText);
             
       //Send response back to Slack from app
     //  ctx.respond(textToTranslate + " in Pig Latin is " + translatedText + "! :tada:");
@@ -37,12 +37,8 @@ public class SlackApp extends SlackAppServlet {
     return app;
   }
   
-  private void sendToKafka(String translatedText) {
-    translationEmitter.send(translatedText);
-  }
-  
   //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
-  private static String translateToPigLatin(String textToTranslate) {
+  private String translateToPigLatin(String textToTranslate) {
     String translatedText = "";
     int i = 0;
     while (i < textToTranslate.length()) {
@@ -73,7 +69,7 @@ public class SlackApp extends SlackAppServlet {
    * @param c The character to test
    * @return True if it's a letter
    */
-  private static boolean isLetter(char c) {
+  private boolean isLetter(char c) {
     return ( (c >='A' && c <='Z') || (c >='a' && c <='z') );
   }
 
@@ -82,7 +78,7 @@ public class SlackApp extends SlackAppServlet {
    * @param word The word in english
    * @return The pig latin version
    */
-  private static String pigWord(String word) {
+  private String pigWord(String word) {
     int split = firstVowel(word);
     return word.substring(split)+"-"+word.substring(0, split)+"ay";
   }
@@ -92,7 +88,7 @@ public class SlackApp extends SlackAppServlet {
    * @param word The word to search
    * @return The index of the first vowel
    */
-  private static int firstVowel(String word) {
+  private int firstVowel(String word) {
     word = word.toLowerCase();
     for (int i=0; i<word.length(); i++)
       if (word.charAt(i)=='a' || word.charAt(i)=='e' ||
