@@ -14,7 +14,7 @@ public class TranslationForwarder {
                                 
     @Outgoing("messaging-demo")                         
     @Broadcast                                          
-    public String forward(String message) {
+    public static String forward(String message) {
         return message;
     }
 
