@@ -32,7 +32,8 @@ public class SlackApp extends SlackAppServlet {
       //Translate the input text and set up the message
       PigLatin pigLatin = new PigLatin();
       String textToTranslate = req.getPayload().getText();
-      SlackMessage message = new SlackMessage(pigLatin.translateToPigLatin(textToTranslate));
+      SlackMessage message = new SlackMessage();
+      message.text = pigLatin.translateToPigLatin(textToTranslate)
       LOG.info(textToTranslate + " translated to " + message.text);
       
       //Send result to Kafka
