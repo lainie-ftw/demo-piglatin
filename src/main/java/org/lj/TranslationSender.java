@@ -9,15 +9,8 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class TranslationSender {
 
-    private String translation;
-
-    @Inject
-    public TranslationSender(String translationIn) {
-        translation = translationIn;
-    }
-
     @Outgoing("messaging-demo")                        
     public String send() {               
-        return translation;
+        return "tester message";
     }
 }
