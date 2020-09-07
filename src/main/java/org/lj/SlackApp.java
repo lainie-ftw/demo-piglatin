@@ -22,7 +22,7 @@ public class SlackApp extends SlackAppServlet {
   @Channel("messaging-demo") 
   Emitter<SlackMessage> kafkaSender;
   
-  public SlackMessage message;
+  private static SlackMessage message;
   
   public SlackApp() throws IOException { 
     super(initSlackApp()); 
