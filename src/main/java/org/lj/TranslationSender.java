@@ -8,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class TranslationSender {
 
+    @Inject
     private String translation;
 
     public TranslationSender(String translationIn) {
