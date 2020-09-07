@@ -5,6 +5,10 @@ import org.jboss.logging.Logger;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.servlet.SlackAppServlet;
 
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import javax.inject.Inject;
+
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
@@ -14,6 +18,10 @@ public class SlackApp extends SlackAppServlet {
   
   private static final Logger LOG = Logger.getLogger(SlackApp.class);
   
+  @Inject 
+  @Channel("messaging-demo") 
+  Emitter<SlackMessage> kafkaSender;
+  
   public SlackApp() throws IOException { super(initSlackApp()); }
   public SlackApp(App app) { super(app); }
 
@@ -21,21 +29,21 @@ public class SlackApp extends SlackAppServlet {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       
-      //Translate the input text
+      //Translate the input text and set up the message
       PigLatin pigLatin = new PigLatin();
       String textToTranslate = req.getPayload().getText();
-      String translatedText = pigLatin.translateToPigLatin(textToTranslate);
-      LOG.info(textToTranslate + " translated to " + translatedText);
+      SlackMessage message = new SlackMessage(pigLatin.translateToPigLatin(textToTranslate));
+      LOG.info(textToTranslate + " translated to " + message.text);
       
-       //Send result to Kafka
-      TranslatorResource translator;
-      translator.text = translatedText;
-      translator.addTranslation();
+      //Send result to Kafka
+      kafkaSender.send(message);
       
-      //Send response back to Slack from app
-    //  ctx.respond(textToTranslate + " in Pig Latin is " + translatedText + "! :tada:");
+//      TranslatorResource translator;
+  //    translator.text = translatedText;
+    //  translator.addTranslation();
+      
       //Tell Slack we got the message.
-      return ctx.ack(translatedText);
+      return ctx.ack(message.text);
     });
     return app;
   }
