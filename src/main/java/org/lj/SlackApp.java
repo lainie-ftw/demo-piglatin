@@ -20,12 +20,12 @@ public class SlackApp extends SlackAppServlet {
   
   @Inject 
   @Channel("messaging-demo") 
-  Emitter<SlackMessage> kafkaSender;
+  static Emitter<SlackMessage> kafkaSender;
   
   public SlackApp() throws IOException { super(initSlackApp()); }
   public SlackApp(App app) { super(app); }
 
-  private App initSlackApp() throws IOException {
+  private static App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       
