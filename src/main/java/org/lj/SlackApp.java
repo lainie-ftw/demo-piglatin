@@ -25,7 +25,7 @@ public class SlackApp extends SlackAppServlet {
   public SlackApp() throws IOException { super(initSlackApp()); }
   public SlackApp(App app) { super(app); }
 
-  private static App initSlackApp() throws IOException {
+  private App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       
