@@ -9,9 +9,9 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class TranslationSender {
 
-    @Inject
     private String translation;
 
+    @Inject
     public TranslationSender(String translationIn) {
         translation = translationIn;
     }
