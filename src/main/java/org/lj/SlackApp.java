@@ -22,27 +22,24 @@ public class SlackApp extends SlackAppServlet {
   @Channel("messaging-demo") 
   Emitter<SlackMessage> kafkaSender;
   
-  private static SlackMessage message;
-  
+  public SlackApp(App app) { super(app); }
   public SlackApp() throws IOException { 
     super(initSlackApp()); 
-      LOG.info("did I get here??");
-    kafkaSender.send(message);
   }
-  public SlackApp(App app) { super(app); }
 
-  private static App initSlackApp() throws IOException {
+  private App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       
       //Translate the input text and set up the message
       PigLatin pigLatin = new PigLatin();
       String textToTranslate = req.getPayload().getText();
+      SlackMessage message = new SlackMessage();
       message.text = pigLatin.translateToPigLatin(textToTranslate);
       LOG.info(textToTranslate + " translated to " + message.text);
       
       //Send result to Kafka
-  //    kafkaSender.send(message);
+      kafkaSender.send(message);
       
 //      TranslatorResource translator;
   //    translator.text = translatedText;
