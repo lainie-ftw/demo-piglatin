@@ -20,22 +20,26 @@ public class SlackApp extends SlackAppServlet {
   
   @Inject 
   @Channel("messaging-demo") 
-  static Emitter<SlackMessage> kafkaSender;
+  Emitter<SlackMessage> kafkaSender;
   
-  public SlackApp() throws IOException { super(initSlackApp()); }
+  public SlackMessage message;
+  
+  public SlackApp() throws IOException { 
+    super(initSlackApp()); 
+      LOG.info("did I get here??");
+    kafkaSender.send(message);
+  }
   public SlackApp(App app) { super(app); }
 
   private static App initSlackApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       
-      ProcessSlackRequest.process(req);
       //Translate the input text and set up the message
-  //    PigLatin pigLatin = new PigLatin();
-    //  String textToTranslate = req.getPayload().getText();
-      //SlackMessage message = new SlackMessage();
-      //message.text = pigLatin.translateToPigLatin(textToTranslate);
-      //LOG.info(textToTranslate + " translated to " + message.text);
+      PigLatin pigLatin = new PigLatin();
+      String textToTranslate = req.getPayload().getText();
+      message.text = pigLatin.translateToPigLatin(textToTranslate);
+      LOG.info(textToTranslate + " translated to " + message.text);
       
       //Send result to Kafka
   //    kafkaSender.send(message);
@@ -45,7 +49,7 @@ public class SlackApp extends SlackAppServlet {
     //  translator.addTranslation();
       
       //Tell Slack we got the message.
-      return ctx.ack("sdfidk");
+      return ctx.ack(message.text);
     });
     return app;
   }
