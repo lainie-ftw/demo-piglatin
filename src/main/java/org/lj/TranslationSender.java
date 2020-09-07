@@ -1,0 +1,21 @@
+package org.lj;
+
+import io.reactivex.Flowable;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class TranslationSender {
+
+    private String translation;
+
+    public TranslationSender(String translationIn) {
+        translation.equals(translationIn);
+    }
+
+    @Outgoing("messaging-demo")                        
+    public String send() {               
+        return translation;
+    }
+}
