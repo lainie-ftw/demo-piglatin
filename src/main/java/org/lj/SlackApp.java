@@ -33,7 +33,7 @@ public class SlackApp extends SlackAppServlet {
       PigLatin pigLatin = new PigLatin();
       String textToTranslate = req.getPayload().getText();
       SlackMessage message = new SlackMessage();
-      message.text = pigLatin.translateToPigLatin(textToTranslate)
+      message.text = pigLatin.translateToPigLatin(textToTranslate);
       LOG.info(textToTranslate + " translated to " + message.text);
       
       //Send result to Kafka
