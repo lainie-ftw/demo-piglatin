@@ -12,7 +12,9 @@ import javax.inject.Inject;
 public class TranslatorResource {
     private static final Logger LOG = Logger.getLogger(TranslatorResource.class);
 
-    @Inject @Channel("messaging-demo") Emitter<String> translationEmitter;
+    @Inject 
+    @Channel("messaging-demo") 
+    private Emitter<String> translationEmitter;
 
     public void addTranslation(String translation) {
        LOG.info("incoming translated text is " + translation);
