@@ -38,13 +38,6 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
-      <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-smallrye-reactive-streams-operators -->
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-smallrye-reactive-streams-operators</artifactId>
-    <version>1.7.2.Final</version>
-</dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
