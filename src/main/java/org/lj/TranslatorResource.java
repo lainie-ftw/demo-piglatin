@@ -14,10 +14,12 @@ public class TranslatorResource {
 
     @Inject 
     @Channel("messaging-demo") 
-    private Emitter<String> translationEmitter;
+    private Emitter<TranslatorResource> emitter;
+    
+    public String text;
 
-    public void addTranslation(String translation) {
-       LOG.info("incoming translated text is " + translation);
-       translationEmitter.send(translation);
+    public void addTranslation() {
+       LOG.info("translated text is " + text);
+       emitter.send(this);
     }
 }
