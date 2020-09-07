@@ -11,7 +11,7 @@ public class TranslationSender {
     private String translation;
 
     public TranslationSender(String translationIn) {
-        translation.equals(translationIn);
+        translation = translationIn;
     }
 
     @Outgoing("messaging-demo")                        
