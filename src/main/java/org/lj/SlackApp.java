@@ -28,10 +28,8 @@ public class SlackApp extends SlackAppServlet {
       LOG.info(textToTranslate + " translated to " + translatedText);
       
        //Send result to Kafka
-     // TranslatorResource translator = new TranslatorResource();
-      //translator.addTranslation(translatedText);
-      TranslationSender sender = new TranslationSender();
-      sender.send();
+      TranslatorResource translator = new TranslatorResource();
+      translator.addTranslation(translatedText);
       
       //Send response back to Slack from app
     //  ctx.respond(textToTranslate + " in Pig Latin is " + translatedText + "! :tada:");
