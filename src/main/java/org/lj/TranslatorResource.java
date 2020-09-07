@@ -8,13 +8,12 @@ import org.jboss.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-@ApplicationScoped
 public class TranslatorResource {
     private static final Logger LOG = Logger.getLogger(TranslatorResource.class);
 
     @Inject 
     @Channel("messaging-demo") 
-    private Emitter<TranslatorResource> emitter;
+    Emitter<TranslatorResource> emitter;
     
     public String text;
 
