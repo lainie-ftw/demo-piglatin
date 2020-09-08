@@ -2,7 +2,7 @@ package org.lj;
 
 public class PigLatin {
  
- public String translatedText;
+ public String translatedText = new String();
  
  public PigLatin() {
  }
