@@ -35,7 +35,8 @@ public class SlackApp extends SlackAppServlet {
       LOG.info(textToTranslate + " translated to " + message.text);
       
       //Send result to Kafka
-      KafkaHelper.sendToKafka(message);
+      KafkaHelper helper = new KafkaHelper();
+      helper.sendToKafka(message);
       
 //      TranslatorResource translator;
   //    translator.text = translatedText;
