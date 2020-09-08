@@ -2,9 +2,10 @@ package org.lj;
 
 public class PigLatin {
  
- public String translatedText = new String();
+ public String translatedText;
  
  public PigLatin() {
+   translatedText = new String();
  }
  
  //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
