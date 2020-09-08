@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 @Path("/piglatin")
 @Produces("text/plain")
 @Consumes("text/plain")
-public class PigLatin {
+public class PigLatinResource {
 
     private String translatedText;
 
