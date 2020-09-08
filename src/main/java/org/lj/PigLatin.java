@@ -1,10 +1,15 @@
 package org.lj;
 
 public class PigLatin {
+ 
+ public String translatedText;
+ 
+ public PigLatin() {
+ }
+ 
  //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
  
   public String translateToPigLatin(String textToTranslate) {
-    String translatedText = "";
     int i = 0;
     while (i < textToTranslate.length()) {
       // Take care of punctuation and spaces
