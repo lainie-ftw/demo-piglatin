@@ -18,7 +18,7 @@ public class PigLatinResource {
     @GET
     public String translate(String text) {
         PigLatin pigLatin = new PigLatin();
-        translatedText = pigLatin.translateToPigLatin(inputText);
+        translatedText = pigLatin.translateToPigLatin(text);
         return translatedText;
     }
 }
