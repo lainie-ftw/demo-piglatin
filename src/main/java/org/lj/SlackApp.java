@@ -18,10 +18,6 @@ public class SlackApp extends SlackAppServlet {
   
   private static final Logger LOG = Logger.getLogger(SlackApp.class);
   
-  @Inject 
-  @Channel("messaging-demo") 
-  Emitter<SlackMessage> kafkaSender;
-  
   public SlackApp(App app) { super(app); }
   public SlackApp() throws IOException { 
     super(initSlackApp()); 
@@ -39,7 +35,7 @@ public class SlackApp extends SlackAppServlet {
       LOG.info(textToTranslate + " translated to " + message.text);
       
       //Send result to Kafka
-      kafkaSender.send(message);
+      KafkaHelper.sendToKafka(message);
       
 //      TranslatorResource translator;
   //    translator.text = translatedText;
