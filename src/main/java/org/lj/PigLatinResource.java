@@ -5,20 +5,22 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import javax.ws.rs.core.MediaType;
+
 @Path("/piglatin")
-@Produces("text/plain")
-@Consumes("text/plain")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PigLatinResource {
 
-    private String translatedText;
+    private PigLatin pigLatin = new PigLatin();
 
     public PigLatinResource() {
     }
 
     @GET
-    public String translate(String text) {
+    public PigLatin translate(PigLatin input) {
         PigLatin pigLatin = new PigLatin();
-        translatedText = pigLatin.translateToPigLatin(text);
-        return translatedText;
+        pigLatin.translateToPigLatin(input.translatedText);
+        return pigLatin.translatedText;
     }
 }
