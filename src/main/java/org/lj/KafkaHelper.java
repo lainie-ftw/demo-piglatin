@@ -10,7 +10,7 @@ public class KafkaHelper {
   
   @Inject 
   @Channel("messaging-demo") 
-  Emitter<SlackMessage> kafkaSender;
+  static Emitter<SlackMessage> kafkaSender;
 
   public static void sendToKafka(SlackMessage message) {
     kafkaSender.send(message);
