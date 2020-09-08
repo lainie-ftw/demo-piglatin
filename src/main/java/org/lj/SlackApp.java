@@ -34,13 +34,9 @@ public class SlackApp extends SlackAppServlet {
       message.text = pigLatin.translateToPigLatin(textToTranslate);
       LOG.info(textToTranslate + " translated to " + message.text);
       
-      //Send result to Kafka
-      KafkaHelper helper = new KafkaHelper();
-      helper.sendToKafka(message);
-      
-//      TranslatorResource translator;
-  //    translator.text = translatedText;
-    //  translator.addTranslation();
+      //Send result to Kafka...later...
+//      KafkaHelper helper = new KafkaHelper();
+//      helper.sendToKafka(message);
       
       //Tell Slack we got the message.
       return ctx.ack(message.text);
