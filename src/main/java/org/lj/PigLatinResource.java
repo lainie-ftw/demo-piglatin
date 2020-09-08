@@ -20,6 +20,6 @@ public class PigLatinResource {
     @GET
     public PigLatin translate(PigLatin input) {
         pigLatin.translateToPigLatin(input.translatedText);
-        return pigLatin.translatedText;
+        return pigLatin;
     }
 }
