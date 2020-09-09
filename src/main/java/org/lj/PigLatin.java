@@ -2,38 +2,41 @@ package org.lj;
 
 public class PigLatin {
  
- public String translatedText;
+ public String inputText;
+ public String outputText;
  
  public PigLatin() {
-   translatedText = new String();
+   outputText = new String();
  }
  
  //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
  
   public String translateToPigLatin(String textToTranslate) {
-    translatedText = "";
+    inputText = textToTranslate;
+    outputText = "";
+   
     int i = 0;
-    while (i < textToTranslate.length()) {
+    while (i < inputText.length()) {
       // Take care of punctuation and spaces
-      while (i < textToTranslate.length() && !isLetter(textToTranslate.charAt(i))) {
-        translatedText = translatedText + textToTranslate.charAt(i);
+      while (i < inputText.length() && !isLetter(inputText.charAt(i))) {
+        outputText = outputText + inputText.charAt(i);
         i++;
       }
 
       // If there aren't any words left, stop.
-      if (i >= textToTranslate.length()) break;
+      if (i >= inputText.length()) break;
 
       // Otherwise we're at the beginning of a word.
       int begin = i;
-      while (i<textToTranslate.length() && isLetter(textToTranslate.charAt(i))) {
+      while (i<inputText.length() && isLetter(inputText.charAt(i))) {
         i++;
       }
 
       // Now we're at the end of a word, so translate it.
       int end = i;
-      translatedText = translatedText + pigWord(textToTranslate.substring(begin, end));
+      outputText = outputText + pigWord(inputText.substring(begin, end));
   }
-  return translatedText;
+  return outputText;
 }
 
   /**
