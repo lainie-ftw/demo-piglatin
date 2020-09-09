@@ -21,18 +21,20 @@ reset=$(tput sgr0)
 #Let's do this thing...
 read -p "${green}Welcome to the Pig Latin Translator Serverless demo! Press enter to proceed. ${reset}"
 
-read -p "${blue}Login to the cluster and create the piglatin project.${reset}"
+read -p "${blue}Login to the cluster, create the piglatin project, and create the Slack App key secret.${reset}"
 oc login ${clusterapiurl}
 oc new-project ${projectname}
+oc create secret generic slack-signing-secret --from-literal=SLACK_SIGNING_SECRET=--SLACK APP SECRET HERE--
 
 #Deploy the Pig Latin application in the normal way
-read -p "${green}We're going to deploy the Pig Latin application in the usual way, using the OpenJDK template in the catalog in the UI.${green}"
+read -p "${green}We're going to deploy the Pig Latin application in the usual way, using the OpenJDK template in the catalog in the UI, and apply the secret to it.${green}"
 
 #Change the Slack app slash command endpoint URL
 read -p "${green}In the Slack App admin page, we'll verify that the endpoint URL matches what was deployed.${green}"
 
 #Do the slash command
 read -p "${green}...and then in Slack, we'll test out the slash command.${green}"
+oc project knative-serving
 
 #Install the serverless operator
 read -p "${green}Okay, now let's *do this thing* (serverless!) - starting with installing the OpenShift Serverless operator.${green}"
@@ -68,10 +70,9 @@ read -p "${green}AUDIENCE PARTICIPATION TIME. Try the slash command in Slack, or
 
 #Generate load via hey command
 read -p "${blue}For a slightly more controlled test, we're going to use a binary called hey to generate load. We'll start with 30 seconds of constant traffic, with 5 requests.${blue}"
-hey -z 30s -c 5 http://{appserverless}-{projectname}.apps.{clusterrooturl}/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
+hey -z 30s -c 5 http://pl-serverless-piglatin.apps.cluster-f0fe.f0fe.example.opentlc.com/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
 
 read -p "${blue}Now let's see what happens with 30 seconds of constant traffice, with 25 requests.${blue}"
-hey -z 30s -c 25 http://{appserverless}-{projectname}.apps.{clusterrooturl}/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
+hey -z 30s -c 25 http://pl-serverless-piglatin.apps.cluster-f0fe.f0fe.example.opentlc.com/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
 
 read -p "${green}Let's talk about this some more, back to the slides!${green}"
-
