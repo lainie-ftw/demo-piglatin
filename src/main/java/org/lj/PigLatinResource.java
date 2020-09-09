@@ -29,7 +29,7 @@ public class PigLatinResource {
         // stall a bit
         int i;
         BigInteger fact=BigInteger.valueOf(1); 
-        int number=100;//It is the number to calculate factorial. 
+        int number=200;//It is the number to calculate factorial. 
         for(i=1;i<=number;i++){
             fact = fact.multiply(BigInteger.valueOf(i));
         }
