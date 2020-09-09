@@ -26,10 +26,11 @@ public class PigLatinResource {
         pigLatin = new PigLatin(input.inputText);
         pigLatin.translateToPigLatin();
         // stall a bit
-        int i, fact=1; 
-        int number=10000;//It is the number to calculate factorial. 
+        int i;
+        BigInteger fact=BigInteger.valueOf(1); 
+        int number=100;//It is the number to calculate factorial. 
         for(i=1;i<=number;i++){
-            fact=fact*i;
+            fact = fact.multiply(BigInteger.valueOf(i));
         }
         LOG.info(input + " translated to " + pigLatin + " (" + fact + ")");
         return pigLatin;
