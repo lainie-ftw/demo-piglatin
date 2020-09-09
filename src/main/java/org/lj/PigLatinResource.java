@@ -27,7 +27,7 @@ public class PigLatinResource {
         pigLatin.translateToPigLatin();
         // stall a bit
         int i, fact=1; 
-        int number=100;//It is the number to calculate factorial. 
+        int number=10000;//It is the number to calculate factorial. 
         for(i=1;i<=number;i++){
             fact=fact*i;
         }
