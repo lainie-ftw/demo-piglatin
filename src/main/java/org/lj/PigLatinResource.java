@@ -13,14 +13,15 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PigLatinResource {
 
-    private PigLatin pigLatin = new PigLatin();
+    private PigLatin pigLatin;
 
     public PigLatinResource() {
     }
 
     @POST
     public PigLatin translate(PigLatin input) {
-        pigLatin.translateToPigLatin(input.translatedText);
+        pigLatin = new PigLatin(input.inputText);
+        pigLatin.translateToPigLatin();
         return pigLatin;
     }
 }
