@@ -9,10 +9,13 @@ public class PigLatin {
    outputText = new String();
  }
  
+ public PigLatin(String textToTranslate) {
+   inputText = textToTranslate;
+ }
+ 
  //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
  
-  public String translateToPigLatin(String textToTranslate) {
-    inputText = textToTranslate;
+  public void translateToPigLatin() {
     outputText = "";
    
     int i = 0;
@@ -36,7 +39,6 @@ public class PigLatin {
       int end = i;
       outputText = outputText + pigWord(inputText.substring(begin, end));
   }
-  return outputText;
 }
 
   /**
