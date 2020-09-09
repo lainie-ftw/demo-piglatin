@@ -33,7 +33,7 @@ public class PigLatinResource {
         for(i=1;i<=number;i++){
             fact = fact.multiply(BigInteger.valueOf(i));
         }
-        LOG.info(input + " translated to " + pigLatin + " (" + fact + ")");
+        LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText + " (" + fact + ")");
         return pigLatin;
     }
 }
