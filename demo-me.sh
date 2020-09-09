@@ -70,9 +70,9 @@ read -p "${green}AUDIENCE PARTICIPATION TIME. Try the slash command in Slack, or
 
 #Generate load via hey command
 read -p "${blue}For a slightly more controlled test, we're going to use a binary called hey to generate load. We'll start with 30 seconds of constant traffic, with 5 requests.${blue}"
-hey -z 30s -c 5 http://pl-serverless-piglatin.apps.cluster-f0fe.f0fe.example.opentlc.com/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
+hey -z 30s -c 5 -m POST http://pl-serverless-piglatin.apps.cluster-f0fe.f0fe.example.opentlc.com/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
 
 read -p "${blue}Now let's see what happens with 30 seconds of constant traffice, with 25 requests.${blue}"
-hey -z 30s -c 25 http://pl-serverless-piglatin.apps.cluster-f0fe.f0fe.example.opentlc.com/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
+hey -z 30s -c 25 -m POST http://pl-serverless-piglatin.apps.cluster-f0fe.f0fe.example.opentlc.com/piglatin -H  'Content-Type: application/json' -d  '{"inputText":"hello"}' 
 
 read -p "${green}Let's talk about this some more, back to the slides!${green}"
