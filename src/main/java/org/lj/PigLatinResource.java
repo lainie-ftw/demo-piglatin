@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import org.jboss.logging.Logger;
 import java.math.BigInteger; 
+import java.util.Random;
 
 import javax.ws.rs.core.MediaType;
 
@@ -28,8 +29,9 @@ public class PigLatinResource {
         pigLatin.translateToPigLatin();
         // stall a bit
         int i;
+        Random random = new Random();
         BigInteger fact=BigInteger.valueOf(1); 
-        int number=200;//It is the number to calculate factorial. 
+        int number = random.nextInt(100) + 100;//It is the number to calculate factorial. 
         for(i=1;i<=number;i++){
             fact = fact.multiply(BigInteger.valueOf(i));
         }
