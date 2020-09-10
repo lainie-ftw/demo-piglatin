@@ -28,13 +28,13 @@ public class PigLatinResource {
         pigLatin = new PigLatin(input.inputText);
         pigLatin.translateToPigLatin();
         // stall a bit
-        int i;
-        Random random = new Random();
+        //int i;
+        //Random random = new Random();
         BigInteger fact=BigInteger.valueOf(1); 
-        int number = random.nextInt(100) + 100;//It is the number to calculate factorial. 
-        for(i=1;i<=number;i++){
-            fact = fact.multiply(BigInteger.valueOf(i));
-        }
+        //int number = random.nextInt(100) + 100;//It is the number to calculate factorial. 
+        //for(i=1;i<=number;i++){
+        //    fact = fact.multiply(BigInteger.valueOf(i));
+        //}
         LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText + " (" + fact + ")");
         return pigLatin;
     }
