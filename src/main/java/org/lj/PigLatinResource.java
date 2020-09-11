@@ -1,11 +1,8 @@
 package org.lj;
 
-import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
-import javax.inject.Inject;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,15 +18,13 @@ public class PigLatinResource {
     private PigLatin pigLatin;
     private static final Logger LOG = Logger.getLogger(PigLatinResource.class);
 
-    @Inject @Channel("my-topic") Emitter<PigLatin> pigLatinEmitter;
-
-
     public PigLatinResource() {
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Outgoing("my-topic")
     public PigLatin translate(PigLatin input) {
         pigLatin = new PigLatin(input.inputText);
         pigLatin.translateToPigLatin();
@@ -42,8 +37,6 @@ public class PigLatinResource {
         //    fact = fact.multiply(BigInteger.valueOf(i));
         //}
         LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText + " (" + fact + ")");
-        pigLatinEmitter.send(pigLatin);
-        LOG.info("pigLatinEmitter sent.");
         return pigLatin;
     }
 }
