@@ -16,8 +16,6 @@ import java.util.Random;
 import javax.ws.rs.core.MediaType;
 
 @Path("/piglatin")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class PigLatinResource {
 
     private PigLatin pigLatin;
@@ -30,6 +28,8 @@ public class PigLatinResource {
     }
 
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public PigLatin translate(PigLatin input) {
         pigLatin = new PigLatin(input.inputText);
         pigLatin.translateToPigLatin();
