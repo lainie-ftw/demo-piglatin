@@ -24,7 +24,6 @@ public class PigLatinResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Outgoing("my-topic")
     public PigLatin translate(PigLatin input) {
         pigLatin = new PigLatin(input.inputText);
         pigLatin.translateToPigLatin();
@@ -37,6 +36,12 @@ public class PigLatinResource {
         //    fact = fact.multiply(BigInteger.valueOf(i));
         //}
         LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText + " (" + fact + ")");
+        send();
+        return pigLatin;
+    }
+    
+    @Outgoing("my-topic")
+    public PigLatin send() {
         return pigLatin;
     }
 }
