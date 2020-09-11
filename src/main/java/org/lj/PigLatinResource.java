@@ -41,7 +41,7 @@ public class PigLatinResource {
         return pigLatin;
     }
     
-    @Outgoing("my-topic")
+    @Outgoing("slack")
     @Broadcast
     public PigLatin send() {
         return pigLatin;
