@@ -19,6 +19,8 @@ public class PigLatinResource {
     private PigLatin pigLatin;
     private static final Logger LOG = Logger.getLogger(PigLatinResource.class);
 
+    @Inject @Channel("my-topic") Emitter<PigLatin> pigLatinEmitter;
+
 
     public PigLatinResource() {
     }
@@ -36,6 +38,8 @@ public class PigLatinResource {
         //    fact = fact.multiply(BigInteger.valueOf(i));
         //}
         LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText + " (" + fact + ")");
+        pigLatinEmitter.send(pigLatin);
+        LOG.info("pigLatinEmitter sent.");
         return pigLatin;
     }
 }
