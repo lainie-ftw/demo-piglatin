@@ -1,6 +1,7 @@
 package org.lj;
 
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
+import io.smallrye.reactive.messaging.annotations.Broadcast;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -41,6 +42,7 @@ public class PigLatinResource {
     }
     
     @Outgoing("my-topic")
+    @Broadcast
     public PigLatin send() {
         return pigLatin;
     }
