@@ -11,19 +11,22 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class KafkaResource {
        
-    @Outgoing("slack")
-    @Broadcast
-    public PigLatin send() {
-        return pigLatin;
-    }
-   @Inject
-  @Channel("messaging-demo") 
-  Emitter<SlackMessage> kafkaSender;
+//       @Inject
+  //     PigLatin pigLatin;
+       
+    //   @Outgoing("slack")
+      // @Broadcast
+       //public PigLatin send() {
+         //     return pigLatin;
+       //}
+//   @Inject
+ // @Channel("messaging-demo") 
+  //Emitter<SlackMessage> kafkaSender;
    
-  public void KafkaHelper() {
-  }
+  //public void KafkaHelper() {
+  //}
 
-  public void sendToKafka(SlackMessage message) {
-    kafkaSender.send(message);
-  }
+  //public void sendToKafka(SlackMessage message) {
+    //kafkaSender.send(message);
+  //}
 }
