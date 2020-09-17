@@ -28,9 +28,10 @@ public class SlackApp extends SlackAppServlet {
     app.command("/piglatin", (req, ctx) -> {
       
       //Translate the input text and set up the message
-      PigLatinResource resource = new PigLatinResource();
+      PigLatinHandler handler = new PigLatinHandler();
+ //     PigLatinResource resource = new PigLatinResource();
       PigLatin pigLatin = new PigLatin(req.getPayload().getText());
-      pigLatin = resource.translate(pigLatin);
+      pigLatin = handler.translate(pigLatin);
       
       //Tell Slack we got the message.
       return ctx.ack(pigLatin.outputText);
