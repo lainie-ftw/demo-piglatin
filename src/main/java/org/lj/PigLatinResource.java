@@ -1,6 +1,7 @@
 package org.lj;
 
-import org.eclipse.microprofile.reactive.messaging.Outgoing;
+import io.smallrye.reactive.messaging.annotations.Channel;
+import io.smallrye.reactive.messaging.annotations.Emitter;
 import io.smallrye.reactive.messaging.annotations.Broadcast;
 
 import javax.ws.rs.Consumes;
@@ -13,11 +14,16 @@ import java.util.Random;
 
 import javax.ws.rs.core.MediaType;
 
+
 @Path("/piglatin")
 public class PigLatinResource {
 
     private PigLatin pigLatin;
     private static final Logger LOG = Logger.getLogger(PigLatinResource.class);
+
+    @Inject
+    @Channel("slack")
+    Emitter<PigLatin> slackEmitter;
 
     public PigLatinResource() {
     }
@@ -37,13 +43,13 @@ public class PigLatinResource {
         //    fact = fact.multiply(BigInteger.valueOf(i));
         //}
         LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText + " (" + fact + ")");
-        send();
+        slackEmitter.send(pigLatin);
         return pigLatin;
     }
     
-    @Outgoing("slack")
-    @Broadcast
-    public PigLatin send() {
-        return pigLatin;
-    }
+    // @Outgoing("slack")
+    // @Broadcast
+    // public PigLatin send() {
+    //     return pigLatin;
+    // }
 }
