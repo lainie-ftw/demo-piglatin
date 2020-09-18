@@ -1,6 +1,6 @@
 package org.lj;
 import io.smallrye.reactive.messaging.annotations.Broadcast;
-import io.smallrye.reactive.messaging.annotations.Outgoing;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 import org.jboss.logging.Logger;
 
