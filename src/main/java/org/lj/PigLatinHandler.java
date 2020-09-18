@@ -10,6 +10,7 @@ public class PigLatinHandler {
     private static final Logger LOG = Logger.getLogger(PigLatinResource.class);
 
     public PigLatinHandler() {
+        pigLatin = new PigLatin();
     }
     
     public PigLatinHandler(String inputText) {
