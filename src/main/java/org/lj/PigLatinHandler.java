@@ -6,7 +6,7 @@ import org.jboss.logging.Logger;
 
 public class PigLatinHandler {
 
-    private PigLatin pigLatin;
+    public PigLatin pigLatin;
     private static final Logger LOG = Logger.getLogger(PigLatinResource.class);
 
     public PigLatinHandler() {
