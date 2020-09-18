@@ -6,6 +6,7 @@ public class PigLatin {
  public String outputText;
  
  public PigLatin() {
+   inputText = new String();
    outputText = new String();
  }
  
