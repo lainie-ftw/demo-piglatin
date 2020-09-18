@@ -18,7 +18,6 @@ public class PigLatinHandler {
     }
 
     @Outgoing("slack")
-    @Broadcast
     public PigLatin translate() {
         pigLatin.translateToPigLatin();
         LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText);
