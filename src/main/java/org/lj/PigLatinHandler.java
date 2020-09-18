@@ -12,8 +12,8 @@ public class PigLatinHandler {
     public PigLatinHandler() {
     }
     
-    public PigLatinHandler(PigLatin input) {
-        pigLatin = new PigLatin(input.inputText);
+    public PigLatinHandler(String inputText) {
+        pigLatin = new PigLatin(inputText);
     }
 
     @Outgoing("slack")
