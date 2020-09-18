@@ -11,11 +11,14 @@ public class PigLatinHandler {
 
     public PigLatinHandler() {
     }
+    
+    public PigLatinHandler(PigLatin input) {
+        pigLatin = new PigLatin(input.input.Text);
+    }
 
     @Outgoing("slack")
     @Broadcast
     public PigLatin translate() {
-        pigLatin = new PigLatin(input.inputText);
         pigLatin.translateToPigLatin();
         LOG.info(pigLatin.inputText + " translated to " + pigLatin.outputText);
         return pigLatin;
