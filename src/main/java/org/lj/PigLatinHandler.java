@@ -13,7 +13,7 @@ public class PigLatinHandler {
     }
     
     public PigLatinHandler(PigLatin input) {
-        pigLatin = new PigLatin(input.input.Text);
+        pigLatin = new PigLatin(input.inputText);
     }
 
     @Outgoing("slack")
