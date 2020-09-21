@@ -27,7 +27,7 @@ public class SlackApp extends SlackAppServlet {
     super(initSlackApp()); 
   }
   
-  private void send(PigLatin pigLatin) {
+  private static void send(PigLatin pigLatin) {
     slackEmitter.send(pigLatin);
   }
 
