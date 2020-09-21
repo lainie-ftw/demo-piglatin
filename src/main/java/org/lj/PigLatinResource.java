@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("/piglatin")
-public class PigLatinResource {
+public final class PigLatinResource {
 
     private PigLatin pigLatin;
     private static final Logger LOG = Logger.getLogger(PigLatinResource.class);
