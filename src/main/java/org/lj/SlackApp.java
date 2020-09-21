@@ -34,7 +34,7 @@ public class SlackApp extends SlackAppServlet {
   
   @Override
   protected void doPost(HttpServletRequest request, 
-  HttpServletResponse response) throws ServletException, IOException {
+  HttpServletResponse response) throws IOException {
     initSlackApp();
   }
 
