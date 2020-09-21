@@ -29,17 +29,12 @@ public class SlackApp extends SlackAppServlet {
 
   private static App initSlackApp() throws IOException {
     App app = new App();
-    app.command("/piglatin", (req, ctx, slackEmitter) -> {
+    app.command("/piglatin", (req, ctx) -> {
       
       //Translate the input text and set up the message
       PigLatin pigLatin = new PigLatin(req.getPayload().getText());
       pigLatin.translateToPigLatin();
       slackEmitter.send(pigLatin);
-   //   PigLatinHandler handler = new PigLatinHandler(req.getPayload().getText());
- //     PigLatinResource resource = new PigLatinResource();
-
-    //  PigLatin pigLatin = handler.translate();
-    //  handler.translate();
       
       //Tell Slack we got the message.
       return ctx.ack(pigLatin.outputText);
