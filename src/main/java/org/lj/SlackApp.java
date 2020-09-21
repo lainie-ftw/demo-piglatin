@@ -5,6 +5,11 @@ import org.jboss.logging.Logger;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.servlet.SlackAppServlet;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import javax.inject.Inject;
