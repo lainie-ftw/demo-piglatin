@@ -18,17 +18,9 @@ public class SlackApp extends SlackAppServlet {
   
   private static final Logger LOG = Logger.getLogger(SlackApp.class);
   
-  @Inject
-  @Channel("slack")
-  static Emitter<PigLatin> slackEmitter;
-  
   public SlackApp(App app) { super(app); }
   public SlackApp() throws IOException { 
     super(initSlackApp()); 
-  }
-  
-  private static void send(PigLatin pigLatin) {
-    slackEmitter.send(pigLatin);
   }
 
   private static App initSlackApp() throws IOException {
@@ -36,12 +28,11 @@ public class SlackApp extends SlackAppServlet {
     app.command("/piglatin", (req, ctx) -> {
       
       //Translate the input text and set up the message
-      PigLatin pigLatin = new PigLatin(req.getPayload().getText());
-      pigLatin.translateToPigLatin();
-      send(pigLatin);
+      PigLatin pigLatinIn = new PigLatin(req.getPayload().getText());
+      PigLatin pigLatinOut = PigLatinResource.translateToPigLatin(pigLatinIn);
       
       //Tell Slack we got the message.
-      return ctx.ack(pigLatin.outputText);
+      return ctx.ack(pigLatinOut.outputText);
     });
     return app;
   }
