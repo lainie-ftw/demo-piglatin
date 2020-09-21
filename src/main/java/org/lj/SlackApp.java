@@ -5,11 +5,6 @@ import org.jboss.logging.Logger;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.servlet.SlackAppServlet;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import javax.inject.Inject;
@@ -27,20 +22,14 @@ public class SlackApp extends SlackAppServlet {
   @Channel("slack")
   Emitter<PigLatin> slackEmitter;
   
- // public SlackApp(App app) { super(app); }
- // public SlackApp() throws IOException { 
- //   super(initSlackApp()); 
- // }
-  
-  @Override
-  protected void doPost(HttpServletRequest request, 
-  HttpServletResponse response) throws IOException {
-    initSlackApp();
+  public SlackApp(App app) { super(app); }
+  public SlackApp() throws IOException { 
+    super(initSlackApp()); 
   }
 
-  private App initSlackApp() throws IOException {
+  private static App initSlackApp() throws IOException {
     App app = new App();
-    app.command("/piglatin", (req, ctx) -> {
+    app.command("/piglatin", (req, ctx, slackEmitter) -> {
       
       //Translate the input text and set up the message
       PigLatin pigLatin = new PigLatin(req.getPayload().getText());
