@@ -20,7 +20,7 @@ public class SlackApp extends SlackAppServlet {
   
   @Inject
   @Channel("slack")
-  Emitter<PigLatin> slackEmitter;
+  static Emitter<PigLatin> slackEmitter;
   
   public SlackApp(App app) { super(app); }
   public SlackApp() throws IOException { 
