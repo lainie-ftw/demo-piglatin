@@ -15,7 +15,7 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import javax.inject.Inject;
 
 import java.io.InputStream;
-import org.json.JSONObject;
+import org.json.JsonObject;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
