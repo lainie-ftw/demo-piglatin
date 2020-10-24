@@ -52,7 +52,7 @@ public class EventApp extends HttpServlet{
           LOG.info(sb.toString());
           PrintWriter writer = response.getWriter();    
 	  
-	  JSONObject json = new JSONObject(request.getParameterMap());
+	  JsonObject json = new JsonObject(request.getParameterMap());
 
           PigLatin pigLatin = new PigLatin(json.getString("text"));
           pigLatin.translateToPigLatin();
