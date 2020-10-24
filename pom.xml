@@ -30,11 +30,11 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-<!-- https://mvnrepository.com/artifact/org.json/json -->
+<!-- https://mvnrepository.com/artifact/io.vertx/vertx-core -->
 <dependency>
-    <groupId>org.json</groupId>
-    <artifactId>json</artifactId>
-    <version>20200518</version>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-core</artifactId>
+    <version>4.0.0-milestone5</version>
 </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
