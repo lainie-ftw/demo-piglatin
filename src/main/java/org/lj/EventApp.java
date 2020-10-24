@@ -3,7 +3,7 @@ package org.lj;
 import org.jboss.logging.Logger;
 
 import com.slack.api.bolt.App;
-import com.slack.api.bolt.servlet.SlackAppServlet;
+import com.slack.api.bolt.request.builtin.SlashCommandRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import javax.inject.Inject;
 
 import java.io.InputStream;
-
+import org.json.simple.JSONObject;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
@@ -50,29 +50,15 @@ public class EventApp extends HttpServlet{
            // System.out.print(c);
          }
           LOG.info(sb.toString());
-          PrintWriter writer = response.getWriter();          
+          PrintWriter writer = response.getWriter();    
+	  
+	  JSONObject json = new JSONObject(request.getParameterMap());
+	  LOG.info("json object reference json[text]: " + json[text]);
 
           PigLatin pigLatin = new PigLatin(sb.toString());
           pigLatin.translateToPigLatin();
           slackEmitter.send(pigLatin);
 	  writer.print(pigLatin.outputText);
           writer.close();
-
-
   }
-
-/*  private static App initEventApp() throws IOException {
-    App app = new App();
-    app.command("/piglatin", (req, ctx) -> {
-      
-      //Translate the input text and set up the message
-      PigLatinResource resource = new PigLatinResource();
-      PigLatin pigLatin = new PigLatin(req.getPayload().getText());
-      pigLatin = resource.translate(pigLatin);
-      
-      //Tell Slack we got the message.
-      return ctx.ack(pigLatin.outputText);
-    });
-    return app;
-  }*/
 }
