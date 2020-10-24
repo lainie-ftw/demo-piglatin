@@ -47,20 +47,21 @@ public class EventApp extends HttpServlet{
             sb.append(c);
             
             // prints character
-            System.out.print(c);
+           // System.out.print(c);
          }
           LOG.info(sb.toString());
           PrintWriter writer = response.getWriter();          
-          writer.print("Hola");
+
           PigLatin pigLatin = new PigLatin(sb.toString());
           pigLatin.translateToPigLatin();
           slackEmitter.send(pigLatin);
+	  writer.print(pigLatin.outputText);
           writer.close();
 
 
   }
 
-  private static App initEventApp() throws IOException {
+/*  private static App initEventApp() throws IOException {
     App app = new App();
     app.command("/piglatin", (req, ctx) -> {
       
@@ -73,5 +74,5 @@ public class EventApp extends HttpServlet{
       return ctx.ack(pigLatin.outputText);
     });
     return app;
-  }
+  }*/
 }
