@@ -15,7 +15,7 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import javax.inject.Inject;
 
 import java.io.InputStream;
-import org.json.JsonObject;
+import io.vertx.core.json.JsonObject;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
@@ -53,9 +53,8 @@ public class EventApp extends HttpServlet{
           PrintWriter writer = response.getWriter();    
 	  
 	  JSONObject json = new JSONObject(request.getParameterMap());
-	  //LOG.info("json object reference json.get(text): " + json.get("text"));
 
-          PigLatin pigLatin = new PigLatin(json.get("text"));
+          PigLatin pigLatin = new PigLatin(json.getString("text"));
           pigLatin.translateToPigLatin();
           slackEmitter.send(pigLatin);
 	  writer.print(pigLatin.outputText);
