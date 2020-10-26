@@ -28,7 +28,10 @@ public class EventApp extends HttpServlet{
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
 	  String inputText = request.getParameter("text");
-	  PigLatin pigLatin = new PigLatin(inputText);
+	  String userID = request.getParameter("user_name");
+	  String sourceChannel = request.getParameter("channel_name");
+		  
+	  PigLatin pigLatin = new PigLatin(inputText, userID, sourceChannel);
 	  pigLatin.translateToPigLatin();
 	  slackEmitter.send(pigLatin);
 	 
