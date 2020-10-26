@@ -2,8 +2,8 @@ package org.lj;
 
 import org.jboss.logging.Logger;
 
-import com.slack.api.bolt.App;
-import com.slack.api.bolt.servlet.SlackAppServlet;
+//import com.slack.api.bolt.App;
+//import com.slack.api.bolt.servlet.SlackAppServlet;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
@@ -12,7 +12,9 @@ import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
-@WebServlet("/slack/events")
+public class SlackApp {
+
+/*@WebServlet("/slack/events")
 public class SlackApp extends SlackAppServlet {
   private static final long serialVersionUID = 1L;
   
@@ -36,5 +38,5 @@ public class SlackApp extends SlackAppServlet {
       return ctx.ack(pigLatinOut.outputText);
     });
     return app;
-  }
+  }*/
 }
