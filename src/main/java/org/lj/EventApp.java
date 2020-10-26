@@ -52,9 +52,11 @@ public class EventApp extends HttpServlet{
           LOG.info(sb.toString());
           PrintWriter writer = response.getWriter();    
 	  
-	  JsonObject json = new JsonObject(request.getParameterMap());
+	 // JsonObject json = new JsonObject(request.getParameterMap());
+	  
+	  String inputText = request.getParameter("text");
 
-          PigLatin pigLatin = new PigLatin(json.getString("text"));
+          PigLatin pigLatin = new PigLatin(inputText);
           pigLatin.translateToPigLatin();
           slackEmitter.send(pigLatin);
 	  writer.print(pigLatin.outputText);
