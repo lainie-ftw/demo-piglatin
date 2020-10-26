@@ -2,9 +2,6 @@ package org.lj;
 
 import org.jboss.logging.Logger;
 
-import com.slack.api.bolt.App;
-import com.slack.api.bolt.request.builtin.SlashCommandRequest;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +12,6 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import javax.inject.Inject;
 
 import java.io.InputStream;
-import io.vertx.core.json.JsonObject;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
@@ -35,21 +31,21 @@ public class EventApp extends HttpServlet{
   protected void doPost(HttpServletRequest request, 
   HttpServletResponse response)
 	      throws ServletException, IOException {
-          InputStream  is = request.getInputStream();
-          StringBuilder sb = new StringBuilder();
+      //    InputStream  is = request.getInputStream();
+      //    StringBuilder sb = new StringBuilder();
 
-          int i;
-          char c;
-          while((i = is.read())!=-1) {
+      //    int i;
+      //    char c;
+      //    while((i = is.read())!=-1) {
          
             // converts integer to character
-            c = (char)i;
-            sb.append(c);
+       //     c = (char)i;
+       //     sb.append(c);
             
             // prints character
            // System.out.print(c);
-         }
-          LOG.info(sb.toString());
+       //  }
+       //   LOG.info(sb.toString());
           PrintWriter writer = response.getWriter();    
 	  
 	 // JsonObject json = new JsonObject(request.getParameterMap());
