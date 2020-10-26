@@ -18,7 +18,7 @@ public class PigLatin {
         inputText = inputTextToTranslate;
     }
     
-    public PigLatin(String inputTextToTranslate, String inputUserID, String, inputSourceChannel) {
+    public PigLatin(String inputTextToTranslate, String inputUserID, String inputSourceChannel) {
         inputText = inputTextToTranslate;
         userID = inputUserID;
         sourceChannel = inputSourceChannel;
