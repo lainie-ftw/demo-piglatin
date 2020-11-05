@@ -37,7 +37,7 @@ public class EventApp extends HttpServlet{
 	  //Set up the message to go to the admin channel in the format:
 	  //User [UserID] sent `/piglatin [inputText]` to channel [channelID]. [inputText] was translated to [outputText].
 	  String adminMessage = "User <@" + userID + "> sent `/piglatin " + inputText + "` to channel <#" + sourceChannelID
-		  + ">. " + inputText + " was translated to " + outputText + ".";
+		  + ">. `" + inputText + "` was translated to `" + outputText + "`.";
 	  
 	  //Send the message in the format text: message to Kafka so it gets to the Admin :eyes: channel.
 	  SlackMessage slackMessage = new SlackMessage(adminMessage);
