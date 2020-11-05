@@ -17,26 +17,31 @@ import java.io.PrintWriter;
 
 @WebServlet("/events")
 public class EventApp extends HttpServlet{
-	
-//  private static final long serialVersionUID = 1L;
   private static final Logger LOG = Logger.getLogger(EventApp.class);
   
   @Inject
   @Channel("slack")
-  Emitter<PigLatin> slackEmitter;
+  Emitter<SlackMessage> slackEmitter;
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
+	  //Pull variables we care about from the request. 
+	  //All possible variables are listed out here: https://api.slack.com/interactivity/slash-commands#app_command_handling
 	  String inputText = request.getParameter("text");
 	  String userID = request.getParameter("user_name");
 	  String sourceChannel = request.getParameter("channel_name");
-		  
-	  PigLatin pigLatin = new PigLatin(inputText, userID, sourceChannel);
-	  pigLatin.translateToPigLatin();
-	  slackEmitter.send(pigLatin);
+	  
+	  //Translate the input text into PigLatin.
+	  String outputText = PigLatin.translateToPigLatin(inputText);
+	  String adminMessage = "PigLatin App Incoming! Input text: " + inputText + ", output text: " + outputText + ".";
+	  
+	  //Send the message + some metadata to Kafka so it gets to the Admin :eyes: channel.
+	  SlackMessage slackMessage = new SlackMessage(adminMessage, userID, sourceChannel);
+	  slackEmitter.send(slackMessage);
 	 
+	  //Send the translated message back to Slack.
 	  PrintWriter writer = response.getWriter();   
-	  writer.print(pigLatin.outputText);
+	  writer.print(outputText);
 	  writer.close();
   }
 }
