@@ -11,7 +11,7 @@ public class SlackMessage {
         sourceChannel = "";
     }
     
-    public setSlackMessage(String inText, String inUserID, String inSourceChannel) {
+    public void setSlackMessage(String inText, String inUserID, String inSourceChannel) {
         text = inText;
         userID = inUserID;
         sourceChannel = inSourceChannel;
