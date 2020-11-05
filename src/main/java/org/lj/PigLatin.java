@@ -1,25 +1,10 @@
 package org.lj;
 
-public class PigLatin {
-    public String inputText;
-    public String outputText;
-    
-    public SlackMessage slackMessage;    
- 
-    public PigLatin() {
-        inputText = "";
-        outputText = new String();
-        slackMessage = new SlackMessage();
-    }
- 
-
-    public PigLatin(String inputTextToTranslate) {
-        inputText = inputTextToTranslate;
-    }
+public final class PigLatin {
  
     //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
-    public void translateToPigLatin() {
-        outputText = "";
+    public static String translateToPigLatin(String inputText) {
+        String outputText = "";
    
         int i = 0;
         while (i < inputText.length()) {
@@ -42,6 +27,7 @@ public class PigLatin {
             int end = i;
             outputText = outputText + pigWord(inputText.substring(begin, end));
         }
+        return outputText;
     }
 
     /**
