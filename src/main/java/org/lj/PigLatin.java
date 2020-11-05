@@ -35,7 +35,7 @@ public final class PigLatin {
     * @param c The character to test
     * @return True if it's a letter
     */
-    private boolean isLetter(char c) {
+    private static boolean isLetter(char c) {
         return ( (c >='A' && c <='Z') || (c >='a' && c <='z') );
     }
 
@@ -44,7 +44,7 @@ public final class PigLatin {
     * @param word The word in english
     * @return The pig latin version
     */
-    private String pigWord(String word) {
+    private static String pigWord(String word) {
         int split = firstVowel(word);
         return word.substring(split)+"-"+word.substring(0, split)+"ay";
     }
