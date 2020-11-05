@@ -28,19 +28,22 @@ public class EventApp extends HttpServlet{
 	  //Pull variables we care about from the request. 
 	  //All possible variables are listed out here: https://api.slack.com/interactivity/slash-commands#app_command_handling
 	  String inputText = request.getParameter("text");
-	  String userID = request.getParameter("user_name");
-	  String sourceChannel = request.getParameter("channel_name");
+	  String userID = request.getParameter("user_id");
+	  String sourceChannelID = request.getParameter("channel_id");
 	  
 	  //Translate the input text into PigLatin.
 	  String outputText = PigLatin.translateToPigLatin(inputText);
-	  String adminMessage = "PigLatin App Incoming! User " + userID + " sent `/piglatin " + inputText + "` to channel " + sourceChannel
-		  + ". " + inputText + " was translated to " + outputText + ".";
+	  
+	  //Set up the message to go to the admin channel in the format:
+	  //User [UserID] sent `/piglatin [inputText]` to channel [channelID]. [inputText] was translated to [outputText].
+	  String adminMessage = "User <@" + userID + "> sent `/piglatin " + inputText + "` to channel <#" + sourceChannelID
+		  + ">. " + inputText + " was translated to " + outputText + ".";
 	  
 	  //Send the message in the format text: message to Kafka so it gets to the Admin :eyes: channel.
 	  SlackMessage slackMessage = new SlackMessage(adminMessage);
 	  slackEmitter.send(slackMessage);
 	 
-	  //Send the translated message back to Slack.
+	  //Send the translated message back.
 	  PrintWriter writer = response.getWriter();   
 	  writer.print(outputText);
 	  writer.close();
