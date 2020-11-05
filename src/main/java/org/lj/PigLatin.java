@@ -54,7 +54,7 @@ public final class PigLatin {
     * @param word The word to search
     * @return The index of the first vowel
     */
-    private int firstVowel(String word) {
+    private static int firstVowel(String word) {
         word = word.toLowerCase();
         for (int i=0; i<word.length(); i++)
             if (word.charAt(i)=='a' || word.charAt(i)=='e' || word.charAt(i)=='i' || word.charAt(i)=='o' || word.charAt(i)=='u')
