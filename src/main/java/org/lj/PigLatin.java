@@ -4,24 +4,17 @@ public class PigLatin {
     public String inputText;
     public String outputText;
     
-    public String userID;
-    public String sourceChannel;
-    
+    public SlackMessage slackMessage;    
  
     public PigLatin() {
         inputText = "";
         outputText = new String();
+        slackMessage = new SlackMessage();
     }
  
 
     public PigLatin(String inputTextToTranslate) {
         inputText = inputTextToTranslate;
-    }
-    
-    public PigLatin(String inputTextToTranslate, String inputUserID, String inputSourceChannel) {
-        inputText = inputTextToTranslate;
-        userID = inputUserID;
-        sourceChannel = inputSourceChannel;
     }
  
     //Pig Latin logic borrowed from here: http://pages.cs.wisc.edu/~ltorrey/cs302/examples/PigLatinTranslator.java
