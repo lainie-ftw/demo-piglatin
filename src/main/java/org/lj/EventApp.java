@@ -33,10 +33,11 @@ public class EventApp extends HttpServlet{
 	  
 	  //Translate the input text into PigLatin.
 	  String outputText = PigLatin.translateToPigLatin(inputText);
-	  String adminMessage = "PigLatin App Incoming! Input text: " + inputText + ", output text: " + outputText + ".";
+	  String adminMessage = "PigLatin App Incoming! User " + userID + "sent `/piglatin " + inputText + "` to channel " + sourceChannel
+		  + ". " + inputText + "was translated to " + outputText + ".";
 	  
-	  //Send the message + some metadata to Kafka so it gets to the Admin :eyes: channel.
-	  SlackMessage slackMessage = new SlackMessage(adminMessage, userID, sourceChannel);
+	  //Send the message in the format text: message to Kafka so it gets to the Admin :eyes: channel.
+	  SlackMessage slackMessage = new SlackMessage(adminMessage);
 	  slackEmitter.send(slackMessage);
 	 
 	  //Send the translated message back to Slack.
