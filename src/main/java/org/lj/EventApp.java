@@ -7,10 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javax.inject.Inject;
-import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
-
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,10 +14,6 @@ import java.io.PrintWriter;
 @WebServlet("/events")
 public class EventApp extends HttpServlet{
   private static final Logger LOG = Logger.getLogger(EventApp.class);
-  
-  @Inject
-  @Channel("slack")
-  Emitter<SlackMessage> slackEmitter;
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
@@ -33,15 +25,6 @@ public class EventApp extends HttpServlet{
 	  
 	  //Translate the input text into PigLatin.
 	  String outputText = PigLatin.translateToPigLatin(inputText);
-	  
-	  //Set up the message to go to the admin channel in the format:
-	  //User [UserID] sent `/piglatin [inputText]` to channel [channelID]. [inputText] was translated to [outputText].
-	  String adminMessage = "User <@" + userID + "> sent `/piglatin " + inputText + "` to channel <#" + sourceChannelID
-		  + ">. `" + inputText + "` was translated to `" + outputText + "`.";
-	  
-	  //Send the message in the format text: message to Kafka so it gets to the Admin :eyes: channel.
-	  SlackMessage slackMessage = new SlackMessage(adminMessage);
-	  slackEmitter.send(slackMessage);
 	 
 	  //Send the translated message back.
 	  PrintWriter writer = response.getWriter();   
