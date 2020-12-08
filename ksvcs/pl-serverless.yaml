@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-        - image: image-registry.openshift-image-registry.svc:5000/userx-piglatin/demo-piglatin:latest
+        - image: image-registry.openshift-image-registry.svc:5000/userx-piglatin/piglatin-app:latest
           env:
             - name: SLACK_SIGNING_SECRET
               valueFrom:
