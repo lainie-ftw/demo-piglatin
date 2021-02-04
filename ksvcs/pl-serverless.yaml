@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: pl-serverless
+  name: pl-serverless-2
   namespace: userx-piglatin
 spec:
   template:
