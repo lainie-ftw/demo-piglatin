@@ -6,55 +6,87 @@ You will need a OpenShift 4.5 or greater cluster with the knative operator insta
 
 `Note:` If you are doing this workshop on a cluster that was provided to you this has already been done.
 
-1. Verify knativeserving is working (if not follow instructions above to install operator):
+## Labs
+
+### Part 1
+
+1. Make a project - user[x]-piglatin (top of console)
+    ![makeprojectimage](images/create_project.png)
+
+2. Apply the Slack signing secret to the project
+Workloads > Via the secret option on the left then create Key/Value in top right corner:
+
+    ![secretimage](images/secrets.png)
+
+    Fill with the following:
 
     ```shell
-    oc get knativeserving.operator.knative.dev/knative-serving -n knative-serving --template='{{range .status.conditions}}{{printf "%s=%s\n" .type .status}}{{end}}'
+    Name: slack-signing-secret
+    Key: SLACK_SIGNING_SECRET
+    Value: will provide!
     ```
 
-    Example Output:
+    Example:
+    ![secretimage2](images/secrets2.png)
 
-    ```shell
-    DependenciesInstalled=True
-    DeploymentsAvailable=True
-    InstallSucceeded=True
-    Ready=True
+3. Deploy the application from Developer View:
+
+    Click `+Add:`
+    ![add](images/add.png)
+
+    Click `From Catalog:`
+    ![fromcatalog](images/from_catalog.png)
+
+    Choose OpenJDK template:
+    ![openjdk](images/openjdk_templates.png)
+
+    Click `Instantiate Template:`
+    ![instantiate](images/instantiate.png)
+
+    Fill out the form and click `create` when fields are filled:
+
+    ```
+    Application Name: piglatin-app
+    Java Version: latest
+    Git Repository URL:
+    Git Reference: part1
     ```
 
-## Deploy application via CLI
+    Example:
+    ![images](images/eventdriven.png)
 
-1. Clone repository locally
+    The template will build and deploy the application for you, creating and connecting the necessary components.
 
-   ```shell
-   git clone https://github.com/lainie-ftw/demo-piglatin.git
-   ```
+4. Connect the dots and test it!
+    
+### Part 1 but Serverless-ly
 
-2. Create a new project to work from (change username to yourname):
+1. Apply the following yaml to your project (or use oc apply -f kvscs/pl-serverless.yaml):
 
-   ```shell
-   oc new-project username-piglatin
-   ```
+    
+    Click `+Add:`
+    ![add](images/add.png)
 
-3. Make sure you are in the username-piglatin project
+    Click `YAML:`
+    ![add](images/yaml.png)
 
-    ```shell
-    oc project username-piglatin
+    Paste below into the window:
+    
+    ```yaml
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+    name: pl-serverless
+    namespace: userx-piglatin
+    spec:
+    template:
+        spec:
+        containers:
+            - image: image-registry.openshift-image-registry.svc:5000/userx-piglatin/demo-piglatin:latest
+            env:
+                - name: SLACK_SIGNING_SECRET
+                valueFrom:
+                    secretKeyRef:
+                    name: slack-signing-secret
+                    key: SLACK_SIGNING_SECRET
     ```
-
-4. Create a secret for slack:
-
-   ```shell
-   oc create secret generic <SLACK_API_KEY>
-   ```
-
-5. Create an app with this repository:
-
-    ```shell
-    oc new-app ubi8/openjdk-8~https://github.com/lainie-ftw/demo-piglatin#part1
-    ```
-
-6. Now deploy it via serverless:
-
-   ```shell
-   oc apply -f ksvcs/pl-serverless.yaml
-   ```
