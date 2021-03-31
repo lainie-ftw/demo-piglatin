@@ -6,25 +6,7 @@ You will need a OpenShift 4.5 or greater cluster with the knative operator insta
 
 `Note:` If you are doing this workshop on a cluster that was provided to you this has already been done.
 
-### Install operator via CLI (Cluster Admin ONLY)
-
-1. Create a file named serving.yaml and copy the following example YAML into it:
-
-    ```yaml
-    apiVersion: operator.knative.dev/v1alpha1
-    kind: KnativeServing
-    metadata:
-        name: knative-serving
-        namespace: knative-serving
-    ```
-
-2. Apply the serving.yaml:
-
-    ```shell
-    oc apply -f ksvcs/serving.yaml
-    ```
-
-3. Verify it applied as expected:
+1. Verify knativeserving is working (if not follow instructions above to install operator):
 
     ```shell
     oc get knativeserving.operator.knative.dev/knative-serving -n knative-serving --template='{{range .status.conditions}}{{printf "%s=%s\n" .type .status}}{{end}}'
@@ -71,7 +53,7 @@ You will need a OpenShift 4.5 or greater cluster with the knative operator insta
     oc new-app ubi8/openjdk-8~https://github.com/lainie-ftw/demo-piglatin#part1
     ```
 
-6. Now make this serverless:
+6. Now deploy it via serverless:
 
    ```shell
    oc apply -f ksvcs/pl-serverless.yaml
