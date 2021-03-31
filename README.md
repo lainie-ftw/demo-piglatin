@@ -28,6 +28,7 @@ Workloads > Via the secret option on the left then create Key/Value in top right
     ```
 
     Example:
+    
     ![secretimage2](images/secrets2.png)
 
 3. Deploy the application from Developer View:
@@ -58,7 +59,7 @@ Workloads > Via the secret option on the left then create Key/Value in top right
     ```
 
     Example:
-    
+
     ![images](images/eventdriven.png)
 
     The template will build and deploy the application for you, creating and connecting the necessary components.
