@@ -10,7 +10,7 @@ spec:
         autoscaling.knative.dev/minScale: "1"
     spec:
       containers:
-        - image: image-registry.openshift-image-registry.svc:5000/piglatin/demo-piglatin:latest
+        - image: image-registry.openshift-image-registry.svc:5000/piglatin/piglatin-app:latest
           env:
             - name: SLACK_SIGNING_SECRET
               valueFrom:
